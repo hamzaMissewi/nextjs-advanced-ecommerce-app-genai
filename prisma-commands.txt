@@ -1,0 +1,35 @@
+node scripts/database-migration.js
+
+I see the issue now. The script is failing because we need to create the initial migration first. Let's create the initial migration:
+
+npx prisma migrate dev --name init
+
+npx prisma migrate reset --force
+
+npx prisma migrate dev --name init
+
+node scripts/database-migration.js
+
+
+3. Key Prisma Commands
+Generate Prisma Client
+bash
+npx prisma generate
+Generates the Prisma Client (required after schema changes).
+
+Push Schema to Database
+bash
+npx prisma db push
+Syncs schema with PostgreSQL (for prototyping).
+For production, use migrations instead.
+
+Create & Apply Migrations
+bash
+npx prisma migrate dev --name init
+Creates a migration and applies it to the DB.
+
+Reset the Database
+bash
+npx prisma migrate reset
+Drops the DB, recreates it, and applies migrations.
+
